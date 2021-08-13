@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Data {
     public static void main(String[] args) throws IOException {
-
+    // refer to IO lecture for help
         String directory = "data";
         String filename = "contacts.txt";
 
@@ -26,8 +26,15 @@ public class Data {
             Files.createFile(dataFile);
         }
 
-        List<String> lines = Arrays.asList("testing: 1, 2, 3", "testing: 2, 3, 4"); // create new List of strings
 
+        List<String> contentReadsFromFile = Files.readAllLines(dataFile);// will read a files content
+        List<String> lines = Arrays.asList("testing: 1, 5, 3", "testing: 2, 7, 4"); // create new List of strings
         Files.write(dataFile, lines);
+
+        for (String line: contentReadsFromFile){
+            System.out.println(line);
+        }
+
+
     }
 }
