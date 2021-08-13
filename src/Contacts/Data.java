@@ -38,6 +38,10 @@ public class Data {
 //        for (int i = 0; i < lines.size(); i++) {
 //            System.out.println((i+1)+": "+lines.get(i));
 //        }
+        //TODO: method that shows all contacts
+        //TODO: Add new contact method
+        //TODO: Search contact by name
+        //TODO: delete existing contact
 
 
         // *********************END OF MAIN METHOD*********************
