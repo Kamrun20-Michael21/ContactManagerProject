@@ -35,14 +35,16 @@ public class Data {
         return contactFile;
     }
 
-    //todo uncomment if not working
-    public static void displayContacts() throws IOException {
-//        System.out.println("Testing displayContacts method");
-        List<String> contentReadsFromFile = Files.readAllLines(getContacts());// will read a files content
+    public static List<String> getAllContacts() throws IOException {
+        return Files.readAllLines(getContacts());
+    }
 
+    //todo uncomment if not working
+    public static void displayContacts(List<String> contactsList) throws IOException {
+//        System.out.println("Testing displayContacts method");
         System.out.println("Name          | Phone Number");
         System.out.println("----------------------------");
-        for (String line: contentReadsFromFile){
+        for (String line: contactsList){
             System.out.println(formatContact(line));
         }
     }
@@ -86,8 +88,20 @@ public class Data {
         Files.write(getContacts(), contacts, StandardOpenOption.APPEND);
     }
 
-    public static void findContact() {
+    public static List<String> findContact() throws IOException {
+        List<String> contentReadsFromFile = Files.readAllLines(getContacts());
+        List<String> contacts = new ArrayList<>();
 
+        System.out.print("Enter name: ");
+        String name = input.next();
+
+        for (String line : contentReadsFromFile) {
+            if (line.toLowerCase().contains(name.toLowerCase())) {
+                contacts.add(line);
+            }
+        }
+
+        return contacts;
     }
 
     public static void main(String[] args) throws IOException {
@@ -115,7 +129,7 @@ public class Data {
 //            System.out.println(line);
 //        }
 
-        displayContacts();//todo uncomment
+//        displayContacts();//todo uncomment
 
 
         //alternative to our Enhanced for loop
