@@ -10,6 +10,33 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Data {
+
+    protected static String directory = "data";
+    protected static String filename = "contacts.txt";
+
+    public static Path getContacts() throws IOException {
+        Path dataDirectory = Paths.get(directory);
+        Path contactFile = Paths.get(directory, filename);
+
+        if (Files.notExists(dataDirectory)) {
+            Files.createDirectories(dataDirectory);
+        }
+
+        if (! Files.exists(contactFile)) {
+            Files.createFile(contactFile);
+        }
+
+        return contactFile;
+    }
+
+    public static void displayContacts() throws IOException {
+//        System.out.println("Testing displayContacts method");
+        List<String> contentReadsFromFile = Files.readAllLines(getContacts());// will read a files content
+        for (String line: contentReadsFromFile){
+            System.out.println(line);
+        }
+    }
+
     public static void main(String[] args) throws IOException {
     // refer to IO lecture for help
         String directory = "data";
@@ -31,14 +58,15 @@ public class Data {
         List<String> lines = Arrays.asList("testing: 1, 5, 3", "testing: 2, 7, 4"); // create new List of strings
         Files.write(contactFile, lines);
 
-        for (String line: contentReadsFromFile){
-            System.out.println(line);
-        }
+//        for (String line: contentReadsFromFile){
+//            System.out.println(line);
+//        }
+        displayContacts();
         //alternative to our Enhanced for loop
 //        for (int i = 0; i < lines.size(); i++) {
 //            System.out.println((i+1)+": "+lines.get(i));
 //        }
-        //TODO: method that shows all contacts
+        //TODO: method that shows all contacts (checked)
         //TODO: Add new contact method
         //TODO: Search contact by name
         //TODO: delete existing contact
