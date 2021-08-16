@@ -8,6 +8,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class Data {
 
@@ -16,6 +17,7 @@ public class Data {
     private String firstName;
     private String lastName;
     private int phoneNumber;
+    protected static Scanner input = new Scanner(System.in);
 
     //todo uncomment if not working
     public static Path getContacts() throws IOException {
@@ -33,25 +35,74 @@ public class Data {
         return contactFile;
     }
 
+    public static List<String> getAllContacts() throws IOException {
+        return Files.readAllLines(getContacts());
+    }
+
     //todo uncomment if not working
-    public static void displayContacts() throws IOException {
+    public static void displayContacts(List<String> contactsList) throws IOException {
 //        System.out.println("Testing displayContacts method");
-        List<String> contentReadsFromFile = Files.readAllLines(getContacts());// will read a files content
-        for (String line: contentReadsFromFile){
-            System.out.println(line);
+        System.out.println("Name          | Phone Number");
+        System.out.println("----------------------------");
+        for (String line: contactsList){
+            System.out.println(formatContact(line));
         }
+    }
+
+    public static String formatContact(String contactFileLine) {
+        String[] contactInfo = contactFileLine.split(" ");
+
+        String firstName = contactInfo[0];
+        String lastName = contactInfo[1];
+        String phoneNumber = contactInfo[2];
+
+        return String.format("%s %s | %s", firstName, lastName, phoneNumber);
     }
 
 //    public static void addContact() {
 //        // TODO write contact to contact.txt
 //    }
-public static void addContacts(){
-    //method for adding contacts
-}
+    public static void addContacts() throws IOException {
+        List<String> contacts = new ArrayList<>();
 
+        boolean wantsToAddAnotherContact = true;
 
+        do {
+            System.out.print("Enter first name: ");
+            String firstName = input.next();
 
+            System.out.print("Enter last name: ");
+            String lastName = input.next();
 
+            System.out.print("Enter phone number: ");
+            String phoneNumber = input.next();
+
+            String contact = String.format("%s %s %s", firstName, lastName, phoneNumber);
+
+            contacts.add(contact);
+
+            System.out.print("Add another contact? [y/n] ");
+            wantsToAddAnotherContact = input.next().toLowerCase().contains("y");
+        } while (wantsToAddAnotherContact);
+
+        Files.write(getContacts(), contacts, StandardOpenOption.APPEND);
+    }
+
+    public static List<String> findContact() throws IOException {
+        List<String> contentReadsFromFile = Files.readAllLines(getContacts());
+        List<String> contacts = new ArrayList<>();
+
+        System.out.print("Enter name: ");
+        String name = input.next();
+
+        for (String line : contentReadsFromFile) {
+            if (line.toLowerCase().contains(name.toLowerCase())) {
+                contacts.add(line);
+            }
+        }
+
+        return contacts;
+    }
 
     public static void main(String[] args) throws IOException {
     // refer to IO lecture for help
@@ -78,7 +129,7 @@ public static void addContacts(){
 //            System.out.println(line);
 //        }
 
-        displayContacts();//todo uncomment
+//        displayContacts();//todo uncomment
 
 
         //alternative to our Enhanced for loop
