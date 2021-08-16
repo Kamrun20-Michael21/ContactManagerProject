@@ -39,9 +39,22 @@ public class Data {
     public static void displayContacts() throws IOException {
 //        System.out.println("Testing displayContacts method");
         List<String> contentReadsFromFile = Files.readAllLines(getContacts());// will read a files content
+
+        System.out.println("Name          | Phone Number");
+        System.out.println("----------------------------");
         for (String line: contentReadsFromFile){
-            System.out.println(line);
+            System.out.println(formatContact(line));
         }
+    }
+
+    public static String formatContact(String contactFileLine) {
+        String[] contactInfo = contactFileLine.split(" ");
+
+        String firstName = contactInfo[0];
+        String lastName = contactInfo[1];
+        String phoneNumber = contactInfo[2];
+
+        return String.format("%s %s | %s", firstName, lastName, phoneNumber);
     }
 
 //    public static void addContact() {
@@ -62,7 +75,7 @@ public class Data {
             System.out.print("Enter phone number: ");
             String phoneNumber = input.next();
 
-            String contact = String.format("%s|%s %s", firstName, lastName, phoneNumber);
+            String contact = String.format("%s %s %s", firstName, lastName, phoneNumber);
 
             contacts.add(contact);
 
@@ -73,9 +86,9 @@ public class Data {
         Files.write(getContacts(), contacts, StandardOpenOption.APPEND);
     }
 
+    public static void findContact() {
 
-
-
+    }
 
     public static void main(String[] args) throws IOException {
     // refer to IO lecture for help

@@ -30,7 +30,7 @@ public class Main {
 
         switch (menuChoice) {
             case 1:
-                System.out.println("Display contacts");
+                System.out.println();
                 Data.displayContacts();//Contact.displayContacts();
                 // display all contacts
                 break;
