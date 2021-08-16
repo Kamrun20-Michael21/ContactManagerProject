@@ -1,3 +1,8 @@
+//import Contacts.Contact;
+import Contacts.Data;
+
+import java.io.IOException;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
@@ -16,7 +21,7 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 //        System.out.println("Will print some message");
 //        Contact.contactApp();
         Scanner input = new Scanner(System.in);
@@ -26,10 +31,12 @@ public class Main {
         switch (menuChoice) {
             case 1:
                 System.out.println("Display contacts");
+                Data.displayContacts();//Contact.displayContacts();
                 // display all contacts
                 break;
             case 2:
                 System.out.println("Add contacts");
+                Data.addContacts();//Contact.addContacts()
                 // call add contact method
                 break;
             case 3:
@@ -44,6 +51,8 @@ public class Main {
                 System.out.println("Exit");
                 // exit
                 break;
+            default:
+                System.out.println("That is not a valid entry.");
         }
     }
     // contactApp can be defined

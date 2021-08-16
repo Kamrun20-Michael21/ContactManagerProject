@@ -17,6 +17,7 @@ public class Data {
     private String lastName;
     private int phoneNumber;
 
+    //todo uncomment if not working
     public static Path getContacts() throws IOException {
         Path dataDirectory = Paths.get(directory);
         Path contactFile = Paths.get(directory, filename);
@@ -32,6 +33,7 @@ public class Data {
         return contactFile;
     }
 
+    //todo uncomment if not working
     public static void displayContacts() throws IOException {
 //        System.out.println("Testing displayContacts method");
         List<String> contentReadsFromFile = Files.readAllLines(getContacts());// will read a files content
@@ -40,9 +42,16 @@ public class Data {
         }
     }
 
-    public static void addContact() {
-        // TODO write contact to contact.txt
-    }
+//    public static void addContact() {
+//        // TODO write contact to contact.txt
+//    }
+public static void addContacts(){
+    //method for adding contacts
+}
+
+
+
+
 
     public static void main(String[] args) throws IOException {
     // refer to IO lecture for help
@@ -68,7 +77,10 @@ public class Data {
 //        for (String line: contentReadsFromFile){
 //            System.out.println(line);
 //        }
-        displayContacts();
+
+        displayContacts();//todo uncomment
+
+
         //alternative to our Enhanced for loop
 //        for (int i = 0; i < lines.size(); i++) {
 //            System.out.println((i+1)+": "+lines.get(i));
