@@ -8,6 +8,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class Data {
 
@@ -16,6 +17,7 @@ public class Data {
     private String firstName;
     private String lastName;
     private int phoneNumber;
+    protected static Scanner input = new Scanner(System.in);
 
     //todo uncomment if not working
     public static Path getContacts() throws IOException {
@@ -45,9 +47,31 @@ public class Data {
 //    public static void addContact() {
 //        // TODO write contact to contact.txt
 //    }
-public static void addContacts(){
-    //method for adding contacts
-}
+    public static void addContacts() throws IOException {
+        List<String> contacts = new ArrayList<>();
+
+        boolean wantsToAddAnotherContact = true;
+
+        do {
+            System.out.print("Enter first name: ");
+            String firstName = input.next();
+
+            System.out.print("Enter last name: ");
+            String lastName = input.next();
+
+            System.out.print("Enter phone number: ");
+            String phoneNumber = input.next();
+
+            String contact = String.format("%s|%s %s", firstName, lastName, phoneNumber);
+
+            contacts.add(contact);
+
+            System.out.print("Add another contact? [y/n] ");
+            wantsToAddAnotherContact = input.next().toLowerCase().contains("y");
+        } while (wantsToAddAnotherContact);
+
+        Files.write(getContacts(), contacts, StandardOpenOption.APPEND);
+    }
 
 
 
