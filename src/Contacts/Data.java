@@ -15,7 +15,7 @@ public class Data {
         String directory = "data";
         String filename = "contacts.txt";
 
-        Path dataDirectory = Paths.get(directory);
+        Path dataDirectory = Paths.get(directory);//
         Path contactFile = Paths.get(directory, filename);
 
         if (Files.notExists(dataDirectory)) {
