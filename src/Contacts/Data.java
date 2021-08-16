@@ -13,6 +13,9 @@ public class Data {
 
     protected static String directory = "data";
     protected static String filename = "contacts.txt";
+    private String firstName;
+    private String lastName;
+    private int phoneNumber;
 
     public static Path getContacts() throws IOException {
         Path dataDirectory = Paths.get(directory);
@@ -37,6 +40,10 @@ public class Data {
         }
     }
 
+    public static void addContact() {
+        // TODO write contact to contact.txt
+    }
+
     public static void main(String[] args) throws IOException {
     // refer to IO lecture for help
         String directory = "data";
@@ -55,7 +62,7 @@ public class Data {
 
 
         List<String> contentReadsFromFile = Files.readAllLines(contactFile);// will read a files content
-        List<String> lines = Arrays.asList("testing: 1, 5, 3", "testing: 2, 7, 4"); // create new List of strings
+        List<String> lines = Arrays.asList("testing: 1, 5, 3", "Java is hard"); // create new List of strings
         Files.write(contactFile, lines);
 
 //        for (String line: contentReadsFromFile){
