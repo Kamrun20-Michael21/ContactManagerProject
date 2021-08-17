@@ -81,8 +81,8 @@ public class Data {
             String contact = String.format("%s %s %s", firstName, lastName, phoneNumber);
 
             contacts.add(contact);
-
             System.out.print("Add another contact? [y/n] ");
+
             wantsToAddAnotherContact = input.next().toLowerCase().contains("y");//HACK:: WORKS WITH MAYBE, NOT JUST YES!!!!
         } while (wantsToAddAnotherContact);
 
@@ -108,6 +108,7 @@ public class Data {
     public static void deleteContact() throws IOException {
         List<String> contentReadsFromFile = Files.readAllLines(getContacts());
         List<String> contacts = new ArrayList<>();
+        String removeSingleContact; //=true
 
         for (String contact: contentReadsFromFile){
             contacts.remove(contact);

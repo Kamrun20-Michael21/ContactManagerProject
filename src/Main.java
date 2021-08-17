@@ -31,7 +31,6 @@ public class Main {
         do {
             displayMenu();// display of menu options 1-5
             menuChoice = input.nextInt();//accepts user input int
-
             switch (menuChoice) {
                 case 1:
                     System.out.println();
@@ -53,11 +52,11 @@ public class Main {
                     // call delete contact method
                     break;
                 case 5:
-                    System.out.println("Exit");
+                    System.out.println("\nExiting Program, Goodbye.");
                     // exit
                     break;
                 default:
-                    System.out.println("That is not a valid entry.");
+                    System.out.println("That is not a valid entry, please enter a valid selection.");
             }
         } while (menuChoice != 5);
     }
