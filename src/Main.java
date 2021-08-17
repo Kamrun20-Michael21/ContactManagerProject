@@ -15,10 +15,10 @@ public class Main {
     };
 
     public static void displayMenu() {
+        System.out.println("\n****** Main MENU ******");
         for (String item : menu) {
             System.out.println(item);
         }
-
         System.out.print("Enter an option (1, 2, 3, 4 or 5): ");
     }
 
@@ -29,14 +29,14 @@ public class Main {
         int menuChoice;
 
         do {
-            displayMenu();
-            menuChoice = input.nextInt();
+            displayMenu();// display of menu options 1-5
+            menuChoice = input.nextInt();//accepts user input int
 
             switch (menuChoice) {
                 case 1:
                     System.out.println();
-                    Data.displayContacts(Data.getAllContacts());//Contact.displayContacts();
-                    // display all contacts
+                    Data.displayContacts(Data.getAllContacts());// display all contacts
+                    //Alt option if method is in contact class: Contact.displayContacts();
                     break;
                 case 2:
                     System.out.println("Add contacts");
@@ -49,6 +49,7 @@ public class Main {
                     break;
                 case 4:
                     System.out.println("Delete contacts");
+                    Data.deleteContact();
                     // call delete contact method
                     break;
                 case 5:

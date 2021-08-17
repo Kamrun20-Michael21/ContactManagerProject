@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -42,8 +43,8 @@ public class Data {
     //todo uncomment if not working
     public static void displayContacts(List<String> contactsList) throws IOException {
 //        System.out.println("Testing displayContacts method");
-        System.out.println("Name          | Phone Number");
-        System.out.println("----------------------------");
+        System.out.println("\tName     |     Phone Number");
+        System.out.println("\t---------------------------");
         for (String line: contactsList){
             System.out.println(formatContact(line));
         }
@@ -56,7 +57,7 @@ public class Data {
         String lastName = contactInfo[1];
         String phoneNumber = contactInfo[2];
 
-        return String.format("%s %s | %s", firstName, lastName, phoneNumber);
+        return String.format("%s %s \t|\t %s", firstName, lastName, phoneNumber);
     }
 
 //    public static void addContact() {
@@ -68,13 +69,13 @@ public class Data {
         boolean wantsToAddAnotherContact = true;
 
         do {
-            System.out.print("Enter first name: ");
+            System.out.print("Enter first name: ");// 1st entry
             String firstName = input.next();
 
-            System.out.print("Enter last name: ");
+            System.out.print("Enter last name: ");// 2nd entry
             String lastName = input.next();
 
-            System.out.print("Enter phone number: ");
+            System.out.print("Enter phone number: ");// 3rd entry
             String phoneNumber = input.next();
 
             String contact = String.format("%s %s %s", firstName, lastName, phoneNumber);
@@ -82,7 +83,7 @@ public class Data {
             contacts.add(contact);
 
             System.out.print("Add another contact? [y/n] ");
-            wantsToAddAnotherContact = input.next().toLowerCase().contains("y");
+            wantsToAddAnotherContact = input.next().toLowerCase().contains("y");//HACK:: WORKS WITH MAYBE, NOT JUST YES!!!!
         } while (wantsToAddAnotherContact);
 
         Files.write(getContacts(), contacts, StandardOpenOption.APPEND);
@@ -102,6 +103,16 @@ public class Data {
         }
 
         return contacts;
+    }
+
+    public static void deleteContact() throws IOException {
+        List<String> contentReadsFromFile = Files.readAllLines(getContacts());
+        List<String> contacts = new ArrayList<>();
+
+        for (String contact: contentReadsFromFile){
+            contacts.remove(contact);
+        }
+        Files.write(getContacts(), contacts);
     }
 
     public static void main(String[] args) throws IOException {
