@@ -6,10 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.security.PublicKey;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Data {
 
@@ -67,6 +64,7 @@ public class Data {
         List<String> contacts = new ArrayList<>();
 
         boolean wantsToAddAnotherContact = true;
+        System.out.println("\n***** Add New Contact *****\n");
 
         do {
             System.out.print("Enter first name: ");// 1st entry
@@ -83,7 +81,7 @@ public class Data {
             contacts.add(contact);
             System.out.print("Add another contact? [y/n] ");
 
-            wantsToAddAnotherContact = input.next().toLowerCase().contains("y");//HACK:: WORKS WITH MAYBE, NOT JUST YES!!!!
+            wantsToAddAnotherContact = input.next().equalsIgnoreCase("y");
         } while (wantsToAddAnotherContact);
 
         Files.write(getContacts(), contacts, StandardOpenOption.APPEND);
@@ -93,6 +91,8 @@ public class Data {
         List<String> contentReadsFromFile = Files.readAllLines(getContacts());
         List<String> contacts = new ArrayList<>();
 
+        System.out.println("\n***** Search Contact List *****\n");
+
         System.out.print("Enter name: ");
         String name = input.next();
 
@@ -101,19 +101,31 @@ public class Data {
                 contacts.add(line);
             }
         }
-
+//        if (contacts.size() == 0){
+////            System.out.println("----- Sorry, name search results -----\n");
+////            contacts.add("----- Sorry, name search results -----\n");// THIS WILL NOT WORK
+//        }//todo this is the old code, partially works
         return contacts;
     }
 
     public static void deleteContact() throws IOException {
-        List<String> contentReadsFromFile = Files.readAllLines(getContacts());
-        List<String> contacts = new ArrayList<>();
+//        List<String> contentReadsFromFile = Files.readAllLines(getContacts());
+        List<String> grabContacts = getAllContacts();//this should replace line above -- this is list
+//        List<String> contacts = new ArrayList<>();//assigning an empty array
         String removeSingleContact; //=true
 
-        for (String contact: contentReadsFromFile){
-            contacts.remove(contact);
-        }
-        Files.write(getContacts(), contacts);
+        System.out.println("\n***** Remove a Contact *****\n");
+        System.out.println("-- Enter name to be removed --\n");
+        String deletePerson = input.next();
+        //previously used contentReadsFromFile in place of grabContact
+        grabContacts.removeIf(grabContact -> grabContact.toLowerCase().contains(deletePerson.toLowerCase()));
+        //todo our original thinking below....
+//        for (String grabContact: grabContacts){//previously used contentReadsFromFile in place of grabContact
+//            if (grabContact.toLowerCase().contains(deletePerson.toLowerCase())){
+//                grabContacts.remove(grabContact);
+//            }
+//        }
+        Files.write(getContacts(), grabContacts);
     }
 
     public static void main(String[] args) throws IOException {

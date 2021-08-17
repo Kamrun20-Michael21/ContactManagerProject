@@ -3,6 +3,7 @@ import Contacts.Data;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -38,16 +39,23 @@ public class Main {
                     //Alt option if method is in contact class: Contact.displayContacts();
                     break;
                 case 2:
-                    System.out.println("Add contacts");
+//                    System.out.println("Add contacts");
                     Data.addContacts();//Contact.addContacts()
                     // call add contact method
                     break;
                 case 3:
-                    System.out.println("Search contacts");
-                    Data.displayContacts(Data.findContact());
+//                    System.out.println("Search contacts");
+                    List<String> contactSearch = Data.findContact();
+                    if (contactSearch.size() == 0){
+                        System.out.println("----- Sorry, name search results -----\n");
+//            contacts.add("----- Sorry, name search results -----\n");// THIS WILL NOT WORK
+                    } else {
+                        Data.displayContacts(contactSearch);//Data.displayContacts(Data.findContact()); old way
+                    }
+
                     break;
                 case 4:
-                    System.out.println("Delete contacts");
+//                    System.out.println("Delete contacts");
                     Data.deleteContact();
                     // call delete contact method
                     break;
